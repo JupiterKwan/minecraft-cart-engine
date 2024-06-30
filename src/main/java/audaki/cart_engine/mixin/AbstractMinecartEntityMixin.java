@@ -8,7 +8,6 @@ import net.minecraft.tags.BlockTags;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.MoverType;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.vehicle.AbstractMinecart;
@@ -86,7 +85,7 @@ public abstract class AbstractMinecartEntityMixin extends Entity {
         }
 
         // We only change logic when the minecart is currently being ridden by a living entity (player/villager/mob)
-        boolean hasLivingRider = this.getFirstPassenger() instanceof LivingEntity;
+        boolean hasLivingRider = this.getFirstPassenger() instanceof Player;
         if (!hasLivingRider) {
             return;
         }
