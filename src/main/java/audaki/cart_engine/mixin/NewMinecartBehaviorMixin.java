@@ -31,25 +31,24 @@ public abstract class NewMinecartBehaviorMixin extends MinecartBehavior {
             return;
         }
 
-        IntConsumer setSpeed = (speed) -> {
-            if (speed == 0) {
-                return;
-            }
-            cir.setReturnValue(speed * (this.minecart.isInWater() ? 0.5 : 1.0) / 20.0);
-            cir.cancel();
-        };
-
         Entity passenger = minecart.getFirstPassenger();
         if (passenger == null) {
-            setSpeed.accept(level.getGameRules().getInt(AceGameRules.MINECART_MAX_SPEED_EMPTY_RIDER));
+//            setSpeed.accept(level.getGameRules().getInt(AceGameRules.MINECART_MAX_SPEED_EMPTY_RIDER));
             return;
         }
 
         if (passenger instanceof Player) {
+            IntConsumer setSpeed = (speed) -> {
+                if (speed == 0) {
+                    return;
+                }
+                cir.setReturnValue(speed * (this.minecart.isInWater() ? 0.5 : 1.0) / 20.0);
+                cir.cancel();
+            };
             setSpeed.accept(level.getGameRules().getInt(AceGameRules.MINECART_MAX_SPEED_PLAYER_RIDER));
             return;
         }
 
-        setSpeed.accept(level.getGameRules().getInt(AceGameRules.MINECART_MAX_SPEED_OTHER_RIDER));
+//        setSpeed.accept(level.getGameRules().getInt(AceGameRules.MINECART_MAX_SPEED_OTHER_RIDER));
     }
 }
